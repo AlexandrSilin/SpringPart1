@@ -46,7 +46,6 @@ public class ProductController {
     @GetMapping("/remove/{id}")
     public String deleteProduct(@PathVariable("id") Long id, Model model) {
         productRepository.remove(id);
-//        model.addAttribute("product", productRepository.getProductById(id));
         return "redirect:/product";
     }
 
