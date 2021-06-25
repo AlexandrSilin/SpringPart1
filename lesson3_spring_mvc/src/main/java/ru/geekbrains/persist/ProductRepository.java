@@ -30,7 +30,6 @@ public class ProductRepository {
     }
 
     public void remove(long id) {
-        this.id.set(this.id.get() - 2);
         products.remove(id);
     }
 
