@@ -1,29 +1,30 @@
 <component name="ProjectRunConfigurationManager">
-  <configuration default="false" name="lesson3_spring_mvc [clean,install...]" type="MavenRunConfiguration" factoryName="Maven">
-    <MavenSettings>
-      <option name="myGeneralSettings" />
-      <option name="myRunnerSettings" />
-      <option name="myRunnerParameters">
-        <MavenRunnerParameters>
-          <option name="profiles">
-            <set />
-          </option>
-          <option name="goals">
-            <list>
-              <option value="clean" />
-              <option value="install" />
-              <option value="tomcat7:redeploy" />
-            </list>
-          </option>
-          <option name="pomFileName" />
-          <option name="profilesMap">
-            <map />
-          </option>
-          <option name="resolveToWorkspace" value="false" />
-          <option name="workingDirPath" value="$PROJECT_DIR$/lesson3_spring_mvc" />
-        </MavenRunnerParameters>
-      </option>
-    </MavenSettings>
-    <method v="2" />
-  </configuration>
+    <configuration default="false" name="lesson3_spring_mvc [clean,install...]" type="MavenRunConfiguration"
+                   factoryName="Maven">
+        <MavenSettings>
+            <option name="myGeneralSettings"/>
+            <option name="myRunnerSettings"/>
+            <option name="myRunnerParameters">
+                <MavenRunnerParameters>
+                    <option name="profiles">
+                        <set/>
+                    </option>
+                    <option name="goals">
+                        <list>
+                            <option value="clean"/>
+                            <option value="install"/>
+                            <option value="tomcat7:redeploy"/>
+                        </list>
+                    </option>
+                    <option name="pomFileName"/>
+                    <option name="profilesMap">
+                        <map/>
+                    </option>
+                    <option name="resolveToWorkspace" value="false"/>
+                    <option name="workingDirPath" value="$PROJECT_DIR$/lesson3_spring_mvc"/>
+                </MavenRunnerParameters>
+            </option>
+        </MavenSettings>
+        <method v="2"/>
+    </configuration>
 </component>
