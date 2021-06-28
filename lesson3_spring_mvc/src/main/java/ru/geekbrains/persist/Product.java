@@ -1,11 +1,19 @@
 package ru.geekbrains.persist;
 
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Positive;
+
 public class Product {
+
     private long id;
+
+    @NotBlank
     private String title;
+
+    @Positive
     private long cost;
 
-    public Product(){
+    public Product() {
     }
 
     public Product(long id, String title, long cost) {

@@ -6,6 +6,7 @@ import javax.annotation.PostConstruct;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.atomic.AtomicLong;
 
@@ -37,7 +38,7 @@ public class ProductRepository {
         return new ArrayList<>(products.values());
     }
 
-    public Product getProductById(long id) {
-        return products.get(id);
+    public Optional<Product> getProductById(long id) {
+        return Optional.ofNullable(products.get(id));
     }
 }
