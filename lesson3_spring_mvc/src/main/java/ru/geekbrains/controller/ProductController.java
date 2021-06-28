@@ -18,8 +18,8 @@ import javax.validation.Valid;
 @Controller
 @RequestMapping("/product")
 public class ProductController {
-    private final ProductRepository productRepository;
     private static final Logger logger = LoggerFactory.getLogger(Product.class);
+    private final ProductRepository productRepository;
 
     @Autowired
     public ProductController(ProductRepository productRepository) {
