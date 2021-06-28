@@ -11,7 +11,6 @@
         <module>lesson1_servlets</module>
         <module>lesson2_spring_basics</module>
         <module>lesson3_spring_mvc</module>
-        <module>lesson4_spring_boot</module>
     </modules>
     <packaging>pom</packaging>
 
