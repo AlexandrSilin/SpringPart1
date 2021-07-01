@@ -3,10 +3,10 @@ import entities.Product;
 import javax.persistence.EntityManager;
 import java.util.List;
 
-public class ProductService {
+public class ProductDao {
     private final EntityManager entityManager;
 
-    public ProductService(EntityManager entityManager) {
+    public ProductDao(EntityManager entityManager) {
         this.entityManager = entityManager;
     }
 
