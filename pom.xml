@@ -12,6 +12,7 @@
         <module>lesson2_spring_basics</module>
         <module>lesson3_spring_mvc</module>
         <module>lesson4_spring_boot</module>
+        <module>lesson5_hibernate1</module>
     </modules>
     <packaging>pom</packaging>
 

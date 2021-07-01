@@ -48,8 +48,9 @@ public class ProductController {
         return "product_info";
     }
 
-    @GetMapping("/remove/{id}")
-    public String deleteProduct(@PathVariable("id") Long id, Model model) {
+    @DeleteMapping("/{id}")
+    public String deleteProduct(@PathVariable("id") Long id) {
+        logger.info("Product (id: " + id + ") removed");
         productRepository.remove(id);
         return "redirect:/product";
     }
