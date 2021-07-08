@@ -1,4 +1,4 @@
-package entities;
+package ru.geekbrains.entities;
 
 import javax.persistence.*;
 

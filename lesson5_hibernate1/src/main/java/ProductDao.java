@@ -1,4 +1,4 @@
-import entities.Product;
+import ru.geekbrains.entities.Product;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
