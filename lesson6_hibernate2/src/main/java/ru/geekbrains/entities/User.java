@@ -1,6 +1,7 @@
 package ru.geekbrains.entities;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -14,8 +15,8 @@ public class User {
     @Column(length = 512, nullable = false)
     private String username;
 
-    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
-    private List<Product> products;
+    @ManyToMany(mappedBy = "users")
+    private List<Product> products = new ArrayList<>();
 
     public User() {
     }

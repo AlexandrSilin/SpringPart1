@@ -6,6 +6,8 @@ import ru.geekbrains.entities.User;
 import ru.geekbrains.service.ProductDao;
 import ru.geekbrains.service.UserDao;
 
+import javax.persistence.NoResultException;
+
 public class AppRun {
     private static final ApplicationContext context = new AnnotationConfigApplicationContext(AppConfig.class);
 
@@ -15,8 +17,16 @@ public class AppRun {
         System.out.println(userDao.findAll());
         userDao.save(new User(4L, "user4"));
         System.out.println(productDao.findAll());
-        userDao.getUserProducts(1L).forEach(System.out::println);
-        productDao.getBuyers(3L).forEach(System.out::println);
+        try {
+            userDao.getUserProducts(1L).forEach(System.out::println);
+        } catch (NoResultException e) {
+            System.out.println(e.getMessage());
+        }
+        try {
+            productDao.getBuyers(4L).forEach(System.out::println);
+        } catch (NoResultException e) {
+            System.out.println(e.getMessage());
+        }
     }
 
     public static ApplicationContext getContext() {

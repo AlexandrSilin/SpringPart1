@@ -1,6 +1,7 @@
 package ru.geekbrains.service;
 
 import ru.geekbrains.AppRun;
+import ru.geekbrains.entities.LineItem;
 import ru.geekbrains.entities.Product;
 import ru.geekbrains.entities.User;
 
@@ -50,7 +51,7 @@ public class UserDao {
     }
 
     public List<Product> getUserProducts(Long user_id) {
-        return service.executeForEntityManager(manager -> manager.createQuery("select u from User u join fetch u.products where u.id = :id", User.class)
-                .setParameter("id", user_id).getSingleResult().getProducts());
+        return service.executeForEntityManager(manager -> manager.createQuery("select p from Product p join fetch p.users where p.id = :id", Product.class)
+                .setParameter("id", user_id).getResultList());
     }
 }

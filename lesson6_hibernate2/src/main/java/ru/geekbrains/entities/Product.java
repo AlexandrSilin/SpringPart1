@@ -1,6 +1,8 @@
 package ru.geekbrains.entities;
 
 import javax.persistence.*;
+import java.math.BigDecimal;
+import java.util.List;
 
 @Entity
 @Table(name = "products", schema = "public")
@@ -14,13 +16,17 @@ public class Product {
     private String title;
 
     @Column(nullable = false)
-    private Long cost;
+    private BigDecimal cost;
 
-    @JoinColumn(name = "user_id")
-    @ManyToOne
-    private User user;
+    @ManyToMany
+    @JoinTable(
+            name = "line_item",
+            joinColumns = {@JoinColumn(name = "product_id", foreignKey = @ForeignKey(name = "fk_line_item_product"))},
+            inverseJoinColumns = {@JoinColumn(name = "user_id", foreignKey = @ForeignKey(name = "fk_line_item_user"))}
+    )
+    private List<LineItem> users;
 
-    public Product(Long id, String title, Long cost) {
+    public Product(Long id, String title, BigDecimal cost) {
         this.id = id;
         this.title = title;
         this.cost = cost;
@@ -45,20 +51,20 @@ public class Product {
         this.title = title;
     }
 
-    public Long getCost() {
+    public BigDecimal getCost() {
         return cost;
     }
 
-    public void setCost(Long cost) {
+    public void setCost(BigDecimal cost) {
         this.cost = cost;
     }
 
-    public User getUser() {
-        return user;
+    public List<LineItem> getUsers() {
+        return users;
     }
 
-    public void setUser(User user) {
-        this.user = user;
+    public void setUsers(List<LineItem> users) {
+        this.users = users;
     }
 
     @Override
