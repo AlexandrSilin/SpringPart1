@@ -52,7 +52,7 @@ public class ProductDao {
     }
 
     public List<User> getBuyers(Long id) {
-        return service.executeForEntityManager(manager -> manager.createQuery("select u from User u join fetch u.products where u.id = :id", User.class)
+        return service.executeForEntityManager(manager -> manager.createQuery("select u from User u join fetch u.products p where p.product.id = :id", User.class)
                 .setParameter("id", id).getResultList());
     }
 }

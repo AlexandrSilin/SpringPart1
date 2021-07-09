@@ -18,12 +18,12 @@ public class AppRun {
         userDao.save(new User(4L, "user4"));
         System.out.println(productDao.findAll());
         try {
-            userDao.getUserProducts(1L).forEach(System.out::println);
+            userDao.getUserProducts(2L).forEach(System.out::println);
         } catch (NoResultException e) {
             System.out.println(e.getMessage());
         }
         try {
-            productDao.getBuyers(2L).forEach(System.out::println);
+            productDao.getBuyers(1L).forEach(System.out::println);
         } catch (NoResultException e) {
             System.out.println(e.getMessage());
         }

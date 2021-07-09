@@ -49,8 +49,8 @@ public class UserDao {
                 .setParameter("id", id).executeUpdate());
     }
 
-    public List<Product> getUserProducts(Long user_id) {
-        return service.executeForEntityManager(manager -> manager.createQuery("select p from Product p join fetch p.users where p.id = :id", Product.class)
-                .setParameter("id", user_id).getResultList());
+    public List<Product> getUserProducts(Long id) {
+        return service.executeForEntityManager(manager -> manager.createQuery("select p from Product p join fetch p.users u where u.user.id = :id", Product.class)
+                .setParameter("id", id).getResultList());
     }
 }
