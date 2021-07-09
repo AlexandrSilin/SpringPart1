@@ -23,7 +23,7 @@ public class AppRun {
             System.out.println(e.getMessage());
         }
         try {
-            productDao.getBuyers(4L).forEach(System.out::println);
+            productDao.getBuyers(2L).forEach(System.out::println);
         } catch (NoResultException e) {
             System.out.println(e.getMessage());
         }

@@ -1,7 +1,6 @@
 package ru.geekbrains.service;
 
 import ru.geekbrains.AppRun;
-import ru.geekbrains.entities.LineItem;
 import ru.geekbrains.entities.Product;
 import ru.geekbrains.entities.User;
 

@@ -1,7 +1,6 @@
 package ru.geekbrains.entities;
 
 import javax.persistence.*;
-import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -15,8 +14,8 @@ public class User {
     @Column(length = 512, nullable = false)
     private String username;
 
-    @ManyToMany(mappedBy = "users")
-    private List<Product> products = new ArrayList<>();
+    @OneToMany(mappedBy = "user")
+    private List<LineItem> products;
 
     public User() {
     }
@@ -42,11 +41,11 @@ public class User {
         this.username = username;
     }
 
-    public List<Product> getProducts() {
+    public List<LineItem> getProducts() {
         return products;
     }
 
-    public void setProducts(List<Product> product) {
+    public void setProducts(List<LineItem> product) {
         this.products = product;
     }
 

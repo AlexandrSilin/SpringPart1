@@ -18,12 +18,7 @@ public class Product {
     @Column(nullable = false)
     private BigDecimal cost;
 
-    @ManyToMany
-    @JoinTable(
-            name = "line_item",
-            joinColumns = {@JoinColumn(name = "product_id", foreignKey = @ForeignKey(name = "fk_line_item_product"))},
-            inverseJoinColumns = {@JoinColumn(name = "user_id", foreignKey = @ForeignKey(name = "fk_line_item_user"))}
-    )
+    @OneToMany(mappedBy = "product")
     private List<LineItem> users;
 
     public Product(Long id, String title, BigDecimal cost) {
