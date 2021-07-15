@@ -51,7 +51,7 @@ public class ProductController {
             specification = specification.and(ProductSpecification.maxCost(maxCost.get()));
         }
         model.addAttribute("products", productRepository.findAll(specification,
-                PageRequest.of(page.orElse(1) - 1, size.orElse(2),
+                PageRequest.of(page.orElse(1) - 1, size.orElse(10),
                         Sort.by(Sort.Direction.ASC, col.orElse("id")))));
         return "products";
     }
