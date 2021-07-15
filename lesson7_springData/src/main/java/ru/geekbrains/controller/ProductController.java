@@ -13,6 +13,9 @@ import ru.geekbrains.exeptions.ProductNotFound;
 import ru.geekbrains.persist.Product;
 import ru.geekbrains.persist.ProductRepository;
 
+import javax.annotation.PostConstruct;
+import javax.persistence.EntityManagerFactory;
+import javax.persistence.criteria.CriteriaBuilder;
 import javax.validation.Valid;
 import java.util.ArrayList;
 import java.util.List;
@@ -32,29 +35,10 @@ public class ProductController {
 
     @GetMapping
     public String listPage(Model model,
-                           @RequestParam("Min") Optional<Long> min,
-                           @RequestParam("Max") Optional<Long> max,
-                           @RequestParam("MinCheck") Optional<String> minCheck,
-                           @RequestParam("MaxCheck") Optional<String> maxCheck) {
+                           @RequestParam("minCost") Optional<Long> minCost,
+                           @RequestParam("maxCost") Optional<Long> maxCost) {
         logger.info("Product list page requested");
-        List<Product> products = productRepository.findAll();
-        if (min.isPresent() && max.isPresent()) {
-            if (!(minCheck.isEmpty() || maxCheck.isEmpty())) {
-                products = products.stream().filter(product -> (product.getCost() >= min.get() &&
-                        product.getCost() <= max.get())).collect(Collectors.toList());
-            }
-
-        } else if (minCheck.isEmpty() && maxCheck.isPresent()) {
-            if (max.isPresent()) {
-                products = products.stream().filter(product -> product.getCost() <= max.get())
-                        .collect(Collectors.toList());
-            }
-        } else if (maxCheck.isEmpty() && minCheck.isPresent()) {
-            if (min.isPresent()) {
-                products = products.stream().filter(product -> product.getCost() >= min.get())
-                        .collect(Collectors.toList());
-            }
-        }
+        List<Product> products = productRepository.filterProducts(minCost.orElse(null), maxCost.orElse(null));
         model.addAttribute("products", products);
         return "products";
     }
