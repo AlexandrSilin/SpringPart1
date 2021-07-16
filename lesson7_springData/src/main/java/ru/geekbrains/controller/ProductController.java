@@ -3,9 +3,6 @@ package ru.geekbrains.controller;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Sort;
-import org.springframework.data.jpa.domain.Specification;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -14,45 +11,28 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 import ru.geekbrains.exeptions.ProductNotFound;
 import ru.geekbrains.persist.Product;
-import ru.geekbrains.persist.ProductRepository;
-import ru.geekbrains.persist.ProductSpecification;
+import ru.geekbrains.service.ProductService;
 
-import javax.persistence.EntityManager;
 import javax.validation.Valid;
-import java.util.Optional;
 
 @Controller
 @RequestMapping("/product")
 public class ProductController {
     private static final Logger logger = LoggerFactory.getLogger(Product.class);
-    private final ProductRepository productRepository;
-    private EntityManager em;
+    private final ProductService productService;
 
     @Autowired
-    public ProductController(ProductRepository productRepository) {
-        this.productRepository = productRepository;
+    public ProductController(ProductService productService) {
+        this.productService = productService;
     }
 
     @GetMapping
-    public String listPage(Model model,
-                           @RequestParam("minCost") Optional<Long> minCost,
-                           @RequestParam("maxCost") Optional<Long> maxCost,
-                           @RequestParam("page") Optional<Integer> page,
-                           @RequestParam("size") Optional<Integer> size,
-                           @RequestParam("sortBy") Optional<String> col) {
+    public String listPage(Model model, ProductListParams params) {
         logger.info("Product list page requested");
 //        List<Product> products = productRepository.filterProducts(minCost.orElse(null), maxCost.orElse(null),
 //                page.orElse(1) - 1, size.orElse(10));
-        Specification<Product> specification = Specification.where(null);
-        if (minCost.isPresent()) {
-            specification = specification.and(ProductSpecification.minCost(minCost.get()));
-        }
-        if (maxCost.isPresent()) {
-            specification = specification.and(ProductSpecification.maxCost(maxCost.get()));
-        }
-        model.addAttribute("products", productRepository.findAll(specification,
-                PageRequest.of(page.orElse(1) - 1, size.orElse(10),
-                        Sort.by(Sort.Direction.ASC, col.orElse("id")))));
+
+        model.addAttribute("products", productService.findWithFilter(params));
         return "products";
     }
 
@@ -65,7 +45,7 @@ public class ProductController {
 
     @GetMapping("/{id}")
     public String editProduct(@PathVariable("id") Long id, Model model) {
-        model.addAttribute("product", productRepository.getById(id));
+        model.addAttribute("product", productService.findById(id));
         logger.info("Request product id: " + id);
         return "product_info";
     }
@@ -73,7 +53,7 @@ public class ProductController {
     @DeleteMapping("/{id}")
     public String deleteProduct(@PathVariable("id") Long id) {
         logger.info("Product (id: " + id + ") removed");
-        productRepository.deleteById(id);
+        productService.deleteById(id);
         return "redirect:/product";
     }
 
@@ -84,7 +64,7 @@ public class ProductController {
             logger.info("Bad input");
             return "product_info";
         }
-        productRepository.save(product);
+        productService.save(product);
         return "redirect:/product";
     }
 

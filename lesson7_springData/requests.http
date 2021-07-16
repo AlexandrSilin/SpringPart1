@@ -1,0 +1,30 @@
+GET http://127.0.0.1:8080/spring-mvc-app/api/v1/product/all
+
+###
+
+GET http://127.0.0.1:8080/spring-mvc-app/api/v1/product/8
+
+###
+
+POST http://127.0.0.1:8080/spring-mvc-app/api/v1/product
+Content-Type: application/json
+
+  {
+    "title": "Product rest",
+    "cost": 12987
+  }
+
+###
+
+PUT http://127.0.0.1:8080/spring-mvc-app/api/v1/product
+Content-Type: application/json
+
+  {
+    "id": 8,
+    "title": "Product rest change",
+    "cost": 12987
+  }
+
+###
+
+DELETE http://127.0.0.1:8080/spring-mvc-app/api/v1/product/8
