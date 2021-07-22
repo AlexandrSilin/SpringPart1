@@ -1,0 +1,29 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="fragments/page_header :: page_header()"/>
+
+<body>
+
+<nav class="navbar navbar-expand-lg navbar-light bg-light" th:replace="fragments/navbar :: navbar()"/>
+
+<div class="container">
+    <div class="row py-2">
+        <div class="col-12">
+            <form method="post" th:action="@{/product}" th:object="${product}">
+                <input id="id" th:field="*{id}" type="hidden">
+                <div class="form-group">
+                    <label>Title</label>
+                    <input class="form-control" id="name" placeholder="Enter title" th:field="*{title}" type="text">
+                    <label>Cost</label>
+                    <input class="form-control" id="cost" placeholder="Enter cost" th:field="*{cost}" type="number">
+                </div>
+                <button class="btn btn-primary" type="submit">Submit</button>
+            </form>
+        </div>
+    </div>
+</div>
+
+<th:block th:replace="fragments/default_scripts :: default_scripts()"/>
+</body>
+</html>
