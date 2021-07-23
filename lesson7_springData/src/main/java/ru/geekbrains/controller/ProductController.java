@@ -45,7 +45,7 @@ public class ProductController {
 
     @GetMapping("/{id}")
     public String editProduct(@PathVariable("id") Long id, Model model) {
-        model.addAttribute("product", productService.findById(id));
+        model.addAttribute("product", productService.findById(id).orElseThrow(() -> new ProductNotFound("Product (id: " + id + ") not found")));
         logger.info("Request product id: " + id);
         return "product_info";
     }
