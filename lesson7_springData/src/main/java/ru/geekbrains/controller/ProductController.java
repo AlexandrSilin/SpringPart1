@@ -9,7 +9,7 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
-import ru.geekbrains.exeptions.ProductNotFound;
+import ru.geekbrains.exeptions.NotFoundException;
 import ru.geekbrains.persist.Product;
 import ru.geekbrains.service.ProductService;
 
@@ -45,7 +45,7 @@ public class ProductController {
 
     @GetMapping("/{id}")
     public String editProduct(@PathVariable("id") Long id, Model model) {
-        model.addAttribute("product", productService.findById(id).orElseThrow(() -> new ProductNotFound("Product (id: " + id + ") not found")));
+        model.addAttribute("product", productService.findById(id).orElseThrow(() -> new NotFoundException("Product (id: " + id + ") not found")));
         logger.info("Request product id: " + id);
         return "product_info";
     }
@@ -70,7 +70,7 @@ public class ProductController {
 
     @ExceptionHandler
     @ResponseStatus(HttpStatus.NOT_FOUND)
-    public ModelAndView productNotFoundExceptionHandler(ProductNotFound ex) {
+    public ModelAndView productNotFoundExceptionHandler(NotFoundException ex) {
         ModelAndView modelAndView = new ModelAndView("product_not_found_form");
         modelAndView.addObject("message", ex.getMessage());
         logger.warn("Exception: " + ex.getMessage());
