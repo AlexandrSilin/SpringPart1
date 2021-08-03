@@ -15,6 +15,7 @@
         <module>lesson5_hibernate1</module>
         <module>lesson6_hibernate2</module>
         <module>lesson7_springData</module>
+        <module>lesson10</module>
     </modules>
     <packaging>pom</packaging>
 

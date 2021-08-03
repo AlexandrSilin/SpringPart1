@@ -3,7 +3,7 @@ package ru.geekbrains.rest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import ru.geekbrains.exeptions.BadRequestException;
-import ru.geekbrains.exeptions.ProductNotFound;
+import ru.geekbrains.exeptions.NotFoundException;
 import ru.geekbrains.persist.Product;
 import ru.geekbrains.service.ProductService;
 
@@ -26,7 +26,7 @@ public class ProductResource {
 
     @GetMapping(path = "/{id}", produces = "application/json")
     public Product findById(@PathVariable Long id) {
-        return productService.findById(id).orElseThrow(() -> new ProductNotFound("Product not found"));
+        return productService.findById(id).orElseThrow(() -> new NotFoundException("Product not found"));
     }
 
     @PostMapping(produces = "application/json")

@@ -1,20 +1,32 @@
-<!doctype html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
-<nav class="navbar navbar-expand-lg navbar-light bg-light" th:fragment="navbar()">
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+
+<nav th:fragment="navbar()" class="navbar navbar-expand-lg navbar-light bg-light">
     <a class="navbar-brand" href="#">EShop</a>
 
-    <button aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"
-            class="navbar-toggler"
-            data-target="#navbarSupportedContent" data-toggle="collapse" type="button">
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
     </button>
 
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav mr-auto">
             <li class="nav-item active">
-                <a class="nav-link" href="#">List</a>
+                <a class="nav-link" th:href="@{/product}">Products</a>
+            </li>
+            <li class="nav-item active">
+                <a class="nav-link" th:href="@{/user}">Users</a>
             </li>
         </ul>
+
+        <form sec:authorize="isAuthenticated()"
+              th:action="@{/logout}" th:method="post"
+              class="form-inline my-2 my-lg-0" >
+            <button class="btn btn-outline-success my-2 my-sm-0">
+                Logout <span sec:authentication="principal.username"></span>
+            </button>
+        </form>
     </div>
 </nav>
 </html>
