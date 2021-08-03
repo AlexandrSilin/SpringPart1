@@ -10,15 +10,27 @@
 <div class="container">
     <div class="row py-2">
         <div class="col-12">
-            <form method="post" th:action="@{/product}" th:object="${product}">
-                <input id="id" th:field="*{id}" type="hidden">
+            <form th:action="@{/product}" method="post" th:object="${product}">
+                <input type="hidden" id="id" th:field="*{id}">
                 <div class="form-group">
-                    <label>Title</label>
-                    <input class="form-control" id="name" placeholder="Enter title" th:field="*{title}" type="text">
-                    <label>Cost</label>
-                    <input class="form-control" id="cost" placeholder="Enter cost" th:field="*{cost}" type="number">
+                    <label>Name</label>
+                    <input type="text" class="form-control" id="name" th:field="*{name}"
+                           placeholder="Enter product name">
+                    <p class="text-danger" th:if="${#fields.hasErrors('name')}" th:errors="*{name}"></p>
                 </div>
-                <button class="btn btn-primary" type="submit">Submit</button>
+                <div class="form-group">
+                    <label>Description</label>
+                    <textarea class="form-control" id="description" th:field="*{description}"
+                              placeholder="Enter product description"></textarea>
+                    <p class="text-danger" th:if="${#fields.hasErrors('description')}" th:errors="*{description}"></p>
+                </div>
+                <div class="form-group">
+                    <label>Cost</label>
+                    <input type="number" class="form-control" step=".01" id="cost" th:field="*{cost}"
+                           placeholder="Enter price">
+                    <p class="text-danger" th:if="${#fields.hasErrors('cost')}" th:errors="*{cost}"></p>
+                </div>
+                <button type="submit" class="btn btn-primary">Submit</button>
             </form>
         </div>
     </div>

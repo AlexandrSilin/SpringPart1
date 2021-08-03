@@ -2,30 +2,36 @@ package ru.geekbrains.persist;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.Positive;
+import javax.validation.constraints.NotNull;
+import java.math.BigDecimal;
+import java.util.Objects;
 
 @Entity
 @Table(name = "products")
 public class Product {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column
     private Long id;
 
     @NotBlank
-    @Column(nullable = false)
-    private String title;
+    @Column
+    private String name;
 
-    @Positive
-    @Column(nullable = false)
-    private long cost;
+    @Column
+    private String description;
+
+    @NotNull
+    @Column
+    private BigDecimal cost;
 
     public Product() {
     }
 
-    public Product(long id, String title, long cost) {
+    public Product(Long id, String name, String description, BigDecimal cost) {
         this.id = id;
-        this.title = title;
+        this.name = name;
+        this.description = description;
         this.cost = cost;
     }
 
@@ -37,24 +43,40 @@ public class Product {
         this.id = id;
     }
 
-    public String getTitle() {
-        return title;
+    public String getName() {
+        return name;
     }
 
-    public void setTitle(String title) {
-        this.title = title;
+    public void setName(String name) {
+        this.name = name;
     }
 
-    public long getCost() {
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public BigDecimal getCost() {
         return cost;
     }
 
-    public void setCost(long cost) {
+    public void setCost(BigDecimal cost) {
         this.cost = cost;
     }
 
     @Override
-    public String toString() {
-        return "\nId: " + this.id + "\nTitle: " + this.title + "\nCost: " + this.cost;
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Product product = (Product) o;
+        return id.equals(product.id);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id);
     }
 }
