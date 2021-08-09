@@ -29,9 +29,6 @@ public class ProductController {
     @GetMapping
     public String listPage(Model model, ProductListParams params) {
         logger.info("Product list page requested");
-//        List<Product> products = productRepository.filterProducts(minCost.orElse(null), maxCost.orElse(null),
-//                page.orElse(1) - 1, size.orElse(10));
-
         model.addAttribute("products", productService.findWithFilter(params));
         return "products";
     }

@@ -29,11 +29,30 @@ public class ProductServiceImpl implements ProductService {
         return productRepository.findAll();
     }
 
+
+    /*
+        if (userListParams.getUsernameFilter() != null && !userListParams.getUsernameFilter().isBlank()) {
+            spec = spec.and(UserSpecifications.usernamePrefix(userListParams.getUsernameFilter()));
+        }
+        if (userListParams.getMinAge() != null) {
+            spec = spec.and(UserSpecifications.minAge(userListParams.getMinAge()));
+        }
+        if (userListParams.getMaxAge() != null) {
+            spec = spec.and(UserSpecifications.maxAge(userListParams.getMaxAge()));
+        }
+
+        return userRepository.findAll(spec,
+                        PageRequest.of(
+                                Optional.ofNullable(userListParams.getPage()).orElse(1) - 1,
+                                Optional.ofNullable(userListParams.getSize()).orElse(3),
+                                Sort.by(Optional.ofNullable(userListParams.getSortField())
+                                        .filter(c -> !c.isBlank())
+                                        .orElse("id"))))
+                .map(user -> new UserDto(user.getId(), user.getUsername(), user.getAge()));
+     */
     @Override
     public Page<Product> findWithFilter(ProductListParams params) {
         Specification<Product> specification = Specification.where(null);
-        specification = specification.and(ProductSpecification.minCost(Optional.ofNullable(params.getMinCost()).orElse(0L)));
-        specification = specification.and(ProductSpecification.maxCost(Optional.ofNullable(params.getMaxCost()).orElse(Long.MAX_VALUE)));
         String directionParam = params.getDirection();
         Sort.Direction direction;
         if ("ASC".equals(directionParam)) {
